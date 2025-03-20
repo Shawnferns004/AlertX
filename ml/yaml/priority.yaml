@@ -1,0 +1,9 @@
+names:
+- Critical
+- High
+- Low
+- Medium
+nc: 4
+test: data/images/test/
+train: data/images/train/
+val: data/images/val/

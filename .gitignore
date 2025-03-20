@@ -1,0 +1,21 @@
+# Ignore Node.js dependencies  
+server/node_modules/  
+client/node_modules/  
+ml/data
+
+# Ignore VS Code settings  
+.vscode/  
+
+# Ignore environment variables  
+server/.env  
+client/.env  
+
+# Ignore build and log files  
+dist/  
+build/  
+logs/  
+*.log  
+
+# Ignore OS-specific files  
+.DS_Store  
+Thumbs.db  

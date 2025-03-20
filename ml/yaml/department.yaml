@@ -1,0 +1,11 @@
+names:
+- City Maintenance
+- Disaster Management
+- Emergency Services
+- Fire Department
+- Police
+- Traffic Police
+nc: 6
+test: data/images/test/
+train: data/images/train/
+val: data/images/val/

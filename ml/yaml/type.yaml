@@ -1,0 +1,11 @@
+names:
+- Accident
+- Drink and Drive
+- Earthquake
+- Fire
+- Flood
+- Theft
+nc: 6
+test: data/images/test/
+train: data/images/train/
+val: data/images/val/
