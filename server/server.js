@@ -7,6 +7,13 @@ import reportRouter from './routes/reportRoute.js';
 import configureCloudinary from './config/cloudinary.js';
 import connectDB from './config/mongoDb.js';
 import dotenv from "dotenv";
+import adminRouter from './routes/adminRoute.js';
+
+process.on('uncaughtException', (err) => {
+  console.error('There was an uncaught error', err);
+  process.exit(1); // Exit process to restart properly
+});
+
 
 dotenv.config();
 const app = express();
@@ -20,8 +27,10 @@ configureCloudinary()
 // API to submit a report
 app.use('/api',reportRouter)
 app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRouter);
 
-const PORT = 5000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
+  
   console.log(`Server running on http://localhost:${PORT}`);
 });

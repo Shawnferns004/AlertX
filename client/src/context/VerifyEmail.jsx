@@ -22,7 +22,7 @@ const VerifyEmail = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/auth/verify-email?token=${token}`);
+        const response = await axios.get(`http://localhost:3000/api/auth/verify-email?token=${token}`);
         setMessage(response.data.message);
         
         // Start countdown timer
@@ -47,38 +47,38 @@ const VerifyEmail = () => {
   }, [token, navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
-      <div className="max-w-md w-full">
+    <div className="flex bg-gradient-to-br justify-center p-4 from-blue-50 items-center min-h-screen to-purple-50 via-indigo-50">
+      <div className="w-full max-w-md">
         {/* Logo/Icon Section */}
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-100 mb-4">
-            <Mail className="w-10 h-10 text-blue-600" />
+        <div className="text-center mb-8">
+          <div className="bg-blue-100 h-20 justify-center rounded-full w-20 inline-flex items-center mb-4">
+            <Mail className="h-10 text-blue-600 w-10" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-4xl text-gray-900 font-bold tracking-tight">
             Email Verification
           </h1>
         </div>
 
         {/* Main Card */}
-        <div className="bg-white/80 backdrop-blur-sm shadow-2xl rounded-2xl p-8 border border-white/20">
+        <div className="bg-white/80 border border-white/20 p-8 rounded-2xl shadow-2xl backdrop-blur-sm">
           <div className="text-center">
             {isLoading ? (
-              <div className="flex flex-col items-center gap-6 py-8">
-                <Loader2 className="w-16 h-16 text-blue-600 animate-spin" />
-                <p className="text-lg font-medium text-gray-700">Verifying your email...</p>
+              <div className="flex flex-col gap-6 items-center py-8">
+                <Loader2 className="h-16 text-blue-600 w-16 animate-spin" />
+                <p className="text-gray-700 text-lg font-medium">Verifying your email...</p>
               </div>
             ) : (
               <div className="space-y-6">
                 {message && (
-                  <div className="flex flex-col items-center gap-4 py-6">
-                    <CheckCircle2 className="w-12 h-12 text-green-500" />
+                  <div className="flex flex-col gap-4 items-center py-6">
+                    <CheckCircle2 className="h-12 text-green-500 w-12" />
                     <p className="text-green-600 text-xl font-semibold">{message}</p>
                     <p className="text-gray-500">Redirecting to login in {countdown} seconds...</p>
                   </div>
                 )}
                 {error && (
-                  <div className="flex flex-col items-center gap-4 py-6">
-                    <XCircle className="w-12 h-12 text-red-500" />
+                  <div className="flex flex-col gap-4 items-center py-6">
+                    <XCircle className="h-12 text-red-500 w-12" />
                     <p className="text-red-600 text-xl font-semibold">Verification Failed</p>
                     <p className="text-gray-600">{error}</p>
                   </div>
@@ -89,9 +89,9 @@ const VerifyEmail = () => {
         </div>
 
         {/* Footer */}
-        <div className="mt-8 text-center text-sm text-gray-500">
+        <div className="text-center text-gray-500 text-sm mt-8">
           <p>Need help? Contact our support team at</p>
-          <a href="mailto:support@example.com" className="text-blue-600 hover:text-blue-700 font-medium">
+          <a href="mailto:support@example.com" className="text-blue-600 font-medium hover:text-blue-700">
             support@example.com
           </a>
         </div>

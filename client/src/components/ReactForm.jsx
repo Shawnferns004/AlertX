@@ -122,7 +122,7 @@ const ReportForm = () => {
         data.append("image", report.image);
       }
   
-      await axios.post("http://localhost:5000/api/report", data, {
+      await axios.post("http://localhost:3000/api/report", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -202,31 +202,31 @@ const ReportForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-gray-50">
+    <div className="bg-gradient-to-br from-red-50 min-h-screen to-gray-50 via-white">
       <ToastContainer position="top-right" autoClose={3000} />
-      <div className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <div className="lg:px-8 max-w-4xl mx-auto px-4 py-12 sm:px-6">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center p-2 bg-red-100 rounded-full mb-4">
-            <AlertTriangle className="h-8 w-8 text-red-600" />
+          <div className="bg-red-100 justify-center p-2 rounded-full inline-flex items-center mb-4">
+            <AlertTriangle className="h-8 text-red-600 w-8" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Emergency Report Center</h1>
+          <h1 className="text-3xl text-gray-900 font-bold mb-2">Emergency Report Center</h1>
           <p className="text-gray-600">Quick and accurate emergency reporting system</p>
         </div>
 
         <div className="space-y-6">
           {/* Location Badge */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-            <div className="flex items-center justify-between">
+          <div className="bg-white border border-gray-100 p-4 rounded-xl shadow-sm">
+            <div className="flex justify-between items-center">
               <div className="flex items-center space-x-3">
                 <div className="flex-shrink-0">
-                  <MapPin className="h-5 w-5 text-red-500" />
+                  <MapPin className="h-5 text-red-500 w-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">
+                  <p className="text-gray-900 text-sm font-medium truncate">
                     {isLoadingLocation ? "Getting location..." : "Current Location"}
                   </p>
-                  <p className="text-sm text-gray-500 truncate">
+                  <p className="text-gray-500 text-sm truncate">
                     {isLoadingLocation ? (
                       <span className="flex items-center">
                         <span className="animate-pulse">Detecting your location...</span>
@@ -239,7 +239,7 @@ const ReportForm = () => {
               </div>
               <button
                 onClick={getCurrentLocation}
-                className="inline-flex items-center px-3 py-1 border border-red-200 text-sm font-medium rounded-full text-red-600 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                className="bg-red-50 border border-red-200 rounded-full text-red-600 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 font-medium hover:bg-red-100 inline-flex items-center px-3 py-1"
               >
                 Update
               </button>
@@ -247,34 +247,34 @@ const ReportForm = () => {
           </div>
 
           {/* Main Form Card */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+          <div className="bg-white border border-gray-100 rounded-2xl shadow-lg overflow-hidden">
             {/* Image Upload Section */}
-            <div className="p-6 border-b border-gray-100">
-              <div className="flex items-center gap-2 mb-4">
-                <Camera className="h-5 w-5 text-red-500" />
-                <h2 className="text-lg font-semibold text-gray-900">Visual Evidence</h2>
+            <div className="border-b border-gray-100 p-6">
+              <div className="flex gap-2 items-center mb-4">
+                <Camera className="h-5 text-red-500 w-5" />
+                <h2 className="text-gray-900 text-lg font-semibold">Visual Evidence</h2>
               </div>
 
               {showCamera ? (
-                <div className="relative rounded-lg overflow-hidden border border-gray-200">
+                <div className="border border-gray-200 rounded-lg overflow-hidden relative">
                   <video
                     ref={videoRef}
                     autoPlay
                     playsInline
-                    className="w-full h-[300px] object-cover"
+                    className="h-[300px] w-full object-cover"
                   />
-                  <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-3">
+                  <div className="flex justify-center absolute bottom-4 gap-3 left-0 right-0">
                     <button
                       type="button"
                       onClick={capturePhoto}
-                      className="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                      className="bg-red-600 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 font-medium hover:bg-red-700 px-4 py-2"
                     >
                       Capture Photo
                     </button>
                     <button
                       type="button"
                       onClick={stopCamera}
-                      className="px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                      className="bg-gray-600 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 font-medium hover:bg-gray-700 px-4 py-2"
                     >
                       Cancel
                     </button>
@@ -282,18 +282,18 @@ const ReportForm = () => {
                 </div>
               ) : preview ? (
                 <div className="space-y-4">
-                  <div className="relative rounded-lg overflow-hidden">
+                  <div className="rounded-lg overflow-hidden relative">
                     <img
                       src={preview}
                       alt="Preview"
-                      className="w-full h-[200px] object-cover"
+                      className="h-[200px] w-full object-cover"
                     />
                     <button
                       type="button"
                       onClick={removeImage}
-                      className="absolute top-2 right-2 p-1.5 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
+                      className="bg-red-600 p-1.5 rounded-full text-white absolute hover:bg-red-700 right-2 top-2 transition-colors"
                     >
-                      <X className="w-4 h-4" />
+                      <X className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -301,10 +301,10 @@ const ReportForm = () => {
                 <div className="space-y-4">
                   <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2">
-                      <label className="flex flex-col items-center justify-center h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-all">
-                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                          <Upload className="w-8 h-8 mb-2 text-gray-400" />
-                          <p className="text-sm text-gray-500">Click to upload</p>
+                      <label className="flex flex-col bg-gray-50 border-2 border-dashed border-gray-300 h-32 justify-center rounded-lg cursor-pointer hover:bg-gray-100 items-center transition-all">
+                        <div className="flex flex-col justify-center items-center pb-6 pt-5">
+                          <Upload className="h-8 text-gray-400 w-8 mb-2" />
+                          <p className="text-gray-500 text-sm">Click to upload</p>
                         </div>
                         <input
                           ref={fileInputRef}
@@ -318,10 +318,10 @@ const ReportForm = () => {
                     <button
                       type="button"
                       onClick={startCamera}
-                      className="flex flex-col items-center justify-center h-32 border-2 border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 transition-all"
+                      className="flex flex-col bg-gray-50 border-2 border-gray-300 h-32 justify-center rounded-lg hover:bg-gray-100 items-center transition-all"
                     >
-                      <Camera className="w-8 h-8 mb-2 text-gray-400" />
-                      <p className="text-sm text-gray-500">Use Camera</p>
+                      <Camera className="h-8 text-gray-400 w-8 mb-2" />
+                      <p className="text-gray-500 text-sm">Use Camera</p>
                     </button>
                   </div>
                 </div>
@@ -330,16 +330,16 @@ const ReportForm = () => {
 
             {/* Description Section */}
             <div className="p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <FileText className="h-5 w-5 text-red-500" />
-                <h2 className="text-lg font-semibold text-gray-900">Emergency Details</h2>
+              <div className="flex gap-2 items-center mb-4">
+                <FileText className="h-5 text-red-500 w-5" />
+                <h2 className="text-gray-900 text-lg font-semibold">Emergency Details</h2>
               </div>
               <textarea
                 value={report.description}
                 onChange={(e) => setReport({ ...report, description: e.target.value })}
                 placeholder="Describe the emergency situation in detail..."
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all min-h-[150px] resize-none"
+                className="border border-gray-200 rounded-lg w-full focus:border-transparent focus:ring-2 focus:ring-red-500 min-h-[150px] px-4 py-3 resize-none transition-all"
               />
             </div>
           </div>
@@ -347,7 +347,7 @@ const ReportForm = () => {
           {/* Submit Button */}
           <button
             onClick={handleSubmit}
-            className="w-full bg-red-600 text-white py-4 rounded-xl hover:bg-red-700 transition-all font-medium focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 flex items-center justify-center gap-2 shadow-lg"
+            className="flex bg-red-600 justify-center rounded-xl shadow-lg text-white w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 font-medium gap-2 hover:bg-red-700 items-center py-4 transition-all"
           >
             <Send className="h-5 w-5" />
             Submit Emergency Report

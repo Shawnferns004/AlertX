@@ -30,7 +30,7 @@ const AnalyticsDashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/reports")
+      .get("http://localhost:3000/api/reports")
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -77,16 +77,16 @@ const AnalyticsDashboard = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
       whileHover={{ scale: 1.02 }}
-      className="bg-white rounded-xl shadow-lg p-4 sm:p-6 hover:shadow-xl transition-all duration-200 border border-gray-100"
+      className="bg-white border border-gray-100 p-4 rounded-xl shadow-lg duration-200 hover:shadow-xl sm:p-6 transition-all"
     >
-      <div className="flex items-center justify-between">
+      <div className="flex justify-between items-center">
         <div>
-          <p className="text-gray-600 text-xs sm:text-sm font-medium">{title}</p>
+          <p className="text-gray-600 text-xs font-medium sm:text-sm">{title}</p>
           <motion.p
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-            className="text-xl sm:text-2xl font-bold mt-2 text-gray-900"
+            className="text-gray-900 text-xl font-bold mt-2 sm:text-2xl"
           >
             {value}
           </motion.p>
@@ -118,15 +118,15 @@ const AnalyticsDashboard = () => {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="bg-white p-4 sm:p-6 rounded-xl shadow-lg border border-gray-100"
+      className="bg-white border border-gray-100 p-4 rounded-xl shadow-lg sm:p-6"
     >
       <motion.h3
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-gray-900 flex items-center gap-2"
+        className="flex text-base text-gray-900 font-semibold gap-2 items-center mb-4 sm:mb-6 sm:text-lg"
       >
-        <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+        <Shield className="h-4 text-indigo-600 w-4 sm:h-5 sm:w-5" />
         {title}
       </motion.h3>
       {children}
@@ -135,11 +135,11 @@ const AnalyticsDashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gray-50">
+      <div className="flex bg-gray-50 h-screen justify-center items-center">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-indigo-600"
+          className="border-b-2 border-indigo-600 h-8 rounded-full w-8 sm:h-12 sm:w-12"
         />
       </div>
     );
@@ -150,7 +150,7 @@ const AnalyticsDashboard = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-gray-50 p-3 sm:p-4 md:p-6 lg:p-8 "
+      className="bg-gray-50 p-3 lg:p-8 md:p-6 min-h-screen sm:p-4"
     >
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -158,11 +158,11 @@ const AnalyticsDashboard = () => {
         transition={{ duration: 0.5 }}
         className="mb-6 sm:mb-8"
       >
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Analytics Dashboard</h1>
-        <p className="text-sm sm:text-base text-gray-600 mt-2">Real-time overview of incident reports and trends</p>
+        <h1 className="text-gray-900 text-xl font-bold md:text-3xl sm:text-2xl">Analytics Dashboard</h1>
+        <p className="text-gray-600 text-sm mt-2 sm:text-base">Real-time overview of incident reports and trends</p>
       </motion.div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 mb-6 md:gap-6 sm:gap-4 sm:mb-8">
         <StatCard
           title="Total Reports"
           value={data.length}
@@ -204,13 +204,13 @@ const AnalyticsDashboard = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
-        className="bg-white p-4 sm:p-6 rounded-xl shadow-lg border border-gray-100 mb-6 sm:mb-8"
+        className="bg-white border border-gray-100 p-4 rounded-xl shadow-lg mb-6 sm:mb-8 sm:p-6"
       >
-        <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-gray-900 flex items-center gap-2">
-          <Activity className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+        <h3 className="flex text-base text-gray-900 font-semibold gap-2 items-center mb-4 sm:mb-6 sm:text-lg">
+          <Activity className="h-4 text-indigo-600 w-4 sm:h-5 sm:w-5" />
           Top Issues by Type
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3 sm:gap-4 sm:grid-cols-2">
           {getCounts("type")
             .sort((a, b) => b.value - a.value)
             .slice(0, 3)
@@ -221,21 +221,21 @@ const AnalyticsDashboard = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 whileHover={{ scale: 1.03 }}
-                className="flex items-center p-3 sm:p-4 bg-gray-50 rounded-lg border border-gray-100"
+                className="flex bg-gray-50 border border-gray-100 p-3 rounded-lg items-center sm:p-4"
               >
-                <Activity className="w-6 h-6 sm:w-8 sm:h-8 text-indigo-600 mr-3" />
+                <Activity className="h-6 text-indigo-600 w-6 mr-3 sm:h-8 sm:w-8" />
                 <div>
-                  <p className="font-semibold text-sm sm:text-base text-gray-900">{issue.name}</p>
-                  <p className="text-xs sm:text-sm text-gray-600">{issue.value} incidents</p>
+                  <p className="text-gray-900 text-sm font-semibold sm:text-base">{issue.name}</p>
+                  <p className="text-gray-600 text-xs sm:text-sm">{issue.value} incidents</p>
                 </div>
               </motion.div>
             ))}
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mb-6 sm:gap-6 sm:mb-8">
         <ChartContainer title="Severity Distribution">
-          <div className="h-[250px] sm:h-[300px] md:h-[400px] w-full">
+          <div className="h-[250px] w-full md:h-[400px] sm:h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart 
                 data={getCounts("severity")}
@@ -276,7 +276,7 @@ const AnalyticsDashboard = () => {
         </ChartContainer>
 
         <ChartContainer title="Priority Distribution">
-          <div className="h-[250px] sm:h-[300px] md:h-[400px] w-full">
+          <div className="h-[250px] w-full md:h-[400px] sm:h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -316,8 +316,8 @@ const AnalyticsDashboard = () => {
       </div>
 
       <ChartContainer title="Incident Types Distribution">
-        <div className="w-full flex flex-col md:flex-row items-center">
-          <div className="h-[300px] sm:h-[400px] md:h-[500px] w-full px-2 sm:px-4">
+        <div className="flex flex-col w-full items-center md:flex-row">
+          <div className="h-[300px] w-full md:h-[500px] px-2 sm:h-[400px] sm:px-4">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={getCounts("type")}

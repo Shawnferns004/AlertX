@@ -27,8 +27,10 @@ export const register = async (req, res) => {
       verified: false // Set verified to false initially
     });
 
+    const origin = req.get("origin");
+
     // Send verification email
-    sendVerificationEmail(user.email, verificationToken);
+    sendVerificationEmail(user.email, verificationToken, origin);
 
     res.status(201).json({
       message: 'User registered. Please verify your email.',
@@ -39,7 +41,7 @@ export const register = async (req, res) => {
 };
 
 // Function to send verification email
-const sendVerificationEmail = async (email, token) => {
+const sendVerificationEmail = async (email, token,origin) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -47,8 +49,9 @@ const sendVerificationEmail = async (email, token) => {
       pass: process.env.EMAIL_PASS, // Your email password
     },
   });
+  const frontendUrl = origin;
 
-  const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${token}`;
+  const verificationUrl = `${frontendUrl}/verify-email?token=${token}`;
 
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
