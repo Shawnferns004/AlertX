@@ -1,6 +1,7 @@
 # Ignore Node.js dependencies  
 server/node_modules/  
 client/node_modules/  
+admin/node_modules/  
 ml/data
 
 # Ignore VS Code settings  

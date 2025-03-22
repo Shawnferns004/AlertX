@@ -2,6 +2,7 @@ import { v2 as cloudinary } from "cloudinary";
 import Report from "../models/Report.js";
 import axios from "axios";
 import FormData from "form-data";
+import {  sendReportUpdate } from "../config/webSocket.js";
 
 const addReport = async (req, res) => {
   const { type, description, location, locationName } = req.body;
@@ -58,6 +59,7 @@ const addReport = async (req, res) => {
         });
 
         await newReport.save();
+        sendReportUpdate(newReport._id, true);
         res.status(201).send("Report saved");
         console.log("Report saved");
       })
@@ -72,6 +74,7 @@ const getReport = async (req, res) => {
   const reports = await Report.find();
   res.status(200).json(reports);
 };
+
 
 const updateReport = async (req, res) => {
   try {
@@ -93,6 +96,7 @@ const updateReport = async (req, res) => {
     }
 
     res.json({ message: "Status updated successfully", updatedReport });
+    sendReportUpdate(updatedReport._id, false);
   } catch (error) {
     res.status(500).json({ error: "Error updating status" });
   }

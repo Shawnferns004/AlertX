@@ -46,14 +46,12 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/team" element={<ReportForm/>} />
+                    <Route path="/report" element={<ReportForm/>} />
                     
                     <Route path="/calendar" element={<div>Calendar Page</div>} />
                     
                     <Route path="/analytics" element={<ReportsChart />} />
-                    
-                    <Route path="/messages" element={<div>Messages Page</div>} />
-                    
+                                        
                     <Route path="/documents" element={<Documentation/>} />
                     
                     <Route path="/settings" element={<Settings/>} />

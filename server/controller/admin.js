@@ -29,7 +29,8 @@ const adminLogin = async (req, res) => {
         id: admin._id,
         name: admin.name,
         email: admin.email,
-        department: admin.department
+        department: admin.department,
+        type : admin.type
       },
     });
   } catch (error) {
@@ -69,37 +70,37 @@ const adminGet = async (req, res) => {
   res.status(200).json(admin);
 };
 
-const adminUpdate = async (req, res) => {
-  try {
-    const { id } = req.params; // Admin ID from URL params
-    const { name, email, type, department } = req.body;
 
-    const admin = await Admin.findById(id);
+const adminEmailGet = async (req, res) => {
+  try {
+    const { email } = req.params;
+
+    // Correct way to query by email
+    const admin = await Admin.findOne({ email });
+
     if (!admin) {
       return res.status(404).json({ message: "Admin not found" });
     }
 
-    // Update only provided fields
-    if (name) admin.name = name;
-    if (email) admin.email = email;
-    if (type) admin.type = type;
-    if (department) admin.department = department;
-
-    await admin.save(); // Save updated details
-
-    res.status(200).json({
-      message: "Admin updated successfully",
-      admin: {
-        id: admin._id,
-        name: admin.name,
-        email: admin.email,
-        type: admin.type,
-        department: admin.department,
-      },
-    });
+    res.status(200).json(admin);
   } catch (error) {
-    console.error("Update Error:", error);
-    res.status(500).json({ message: "Something went wrong" });
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const adminUpdate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const updatedReport = await Report.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+    res.json(updatedReport);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update status" });
   }
 };
 
@@ -120,4 +121,4 @@ const adminDelete = async (req, res) => {
   }
 };
 
-export { adminLogin, adminRegister, adminDelete, adminGet, adminUpdate}
+export { adminEmailGet, adminLogin, adminRegister, adminDelete, adminGet, adminUpdate}

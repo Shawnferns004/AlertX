@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { 
   Home, Users, Settings, BarChart2, Calendar, 
-  MessageSquare, FileText, ChevronLeft, ChevronRight,BellElectric
+  MessageSquare, FileText, ChevronLeft, ChevronRight,Fingerprint,ClockFading
 } from 'lucide-react';
-
 import Navbar from './Navbar';
+import { useAuth } from '../context/AuthContext';
+{/* <ClockFading /> */}
 
 const sidebarLinks = [
   { icon: Home, label: 'Dashboard', path: '/dashboard' },
-  { icon: BellElectric, label: 'Report Incident', path: '/report' },
-  { icon: Calendar, label: 'Calendar', path: '/calendar' },
-  { icon: BarChart2, label: 'Analytics & Reports', path: '/analytics' },
-  { icon: FileText, label: 'Documents & Policies', path: '/documents' },
+  { icon: Fingerprint, label: 'Reports', path: '/reports' },
+  { icon: ClockFading, label: 'History', path: '/history' },
+
   { icon: Settings, label: 'Settings', path: '/settings' }
 ];
 
@@ -20,12 +20,12 @@ const Layout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  
+  const {user} = useAuth()
 
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-gray-50">
-      <Navbar  onMenuClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="fixed top-0 left-0 right-0 h-16 z-50" />
+      <Navbar onMenuClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="fixed top-0 left-0 right-0 h-16 z-50" />
       <div className="flex h-[calc(100vh-4rem)] mt-16">
         <aside
           className={`fixed top-[50px] bottom-0 left-0 z-40 bg-white shadow-lg transition-all duration-300 
